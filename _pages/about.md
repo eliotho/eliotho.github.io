@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Chief Scientist and Founder at <a href='https://www.staffinganalytics.io/'>Staffing Analytics</a>. 
+subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
 
 profile:
   align: right
