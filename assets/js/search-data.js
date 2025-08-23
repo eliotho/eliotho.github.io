@@ -391,16 +391,8 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
-          description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
+            },},{id: "news-i-placed-as-finalist-in-the-u-s-army-xtechlive-competition-software-based-ai-powered-fusion-engine-def-con-33-2025",
+          title: 'I placed as Finalist in the U.S. Army xTechLive Competition “Software-based AI-powered fusion...',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
