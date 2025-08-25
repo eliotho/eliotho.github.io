@@ -1,36 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://elioth.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://elioth.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-08-25T21:03:22+00:00</updated><id>https://elioth.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">a post with math</title><link href="https://elioth.github.io/blog/2025/math/" rel="alternate" type="text/html" title="a post with math"/><published>2025-08-24T15:12:00+00:00</published><updated>2025-08-24T15:12:00+00:00</updated><id>https://elioth.github.io/blog/2025/math</id><content type="html" xml:base="https://elioth.github.io/blog/2025/math/"><![CDATA[<p><small><em>Disclaimer: All information in this post is publicly available, either in the Independent Rikers Commission (a.k.a., Lippman Commission) <a href="https://static1.squarespace.com/static/5b6de4731aef1de914f43628/t/67dd7c6d4e5dca1fa86db6d8/1742568562268/Independent+Rikers+Commission+Blueprint+to+Close+Rikers+Island+March+2025.pdf">report</a> or in the <a href="https://www.vitalcitynyc.org/articles/the-citys-new-rikers-math">report</a> that I authored while working as Assistant Commissioner of Operations Research, that was made public through a Freedom of Information Act (FOIA) request made by the Nonprofit Vital City. Moreover, the contents of this post are only my opinions and do not represent the views of the city or any other entity I am or was affiliated with.</em> </small></p> <blockquote> <p>Operations research is a scientiﬁc method of providing executive departments with a quantitative basis for decisions regarding operations under their control.</p> </blockquote> <p>Out of all the definitions of Operations Research, this is the one I like most. It really comprises the quantitative spirit of the discipline while emphasizing that ultimately, the goal is problem solving. The quote is attributed to Philip M. Morse (the father or OR in the U.S.) in a John D. Little’s <a href="https://pubsonline.informs.org/doi/epdf/10.1287/opre.50.1.146.17799">article</a> commemorating the 50th anniversary of the Operations Research Journal.</p> <h2 id="some-background">Some Background</h2> <p>In this post, we talk about connecting one of Little’s key discoveries (his eponymous law) and a very relevant set of problems that are in great need of OR solutions. Out of these problems, Rikers Island has been infamously at the center of innumerable controversies and plagued with problems since its construction. The aim of this post is not to comment on the social and justice aspects of the NYC correctional system, but rather talk about a common set of challenges that stochastic systems (such as Rikers Island) face because of their scale, and some quantitative strategies to guide urban planning for either replace existing facilities or build new ones.</p> <p>As a motivation and context to this problem, Rikers is set to be closed by 2027 and replaced by different facilities in each borough. When this plan was set into law in 2019, the population of Rikers was in a steady decline, and it was then decided that 3,300 beds was enough capacity for the new facilities. Long-story short, a combination of factors including the pandemic, a different set of bail-laws and patterns of crime have set the population in the opposite direction. As part of my work I was tasked with creating projections of the population in the future in a data-driven way back in 2022-23. This post is a commentary on that analysis, which I believe has value beyond correctional facilities, and can be applied to many large scale stochastic systems (such as airports, traffic roads and so on).</p> <h2 id="the-forecast-challenge-and-the-connection-with-littles-law">The Forecast Challenge and the Connection with Little’s Law</h2> <p>Rikers (or any correctional facility) is a stochastic system where there is a series of arrivals that stay a random amount of time (in this case, pretrial cases) before exiting the system. Little’s law is the swiss knife of a scientist studying stochastic systems. The simplicity and beauty of the formula \(L=\lambda w\), expressing that the average number in the system \(L\) is equal to their arrival rate \(\lambda\) times the average waiting time \(w\) provides simple answer to in general a difficult question.</p> <p>While an incredibly useful relation, it doesn’t apply then the arrival rate is time-varying and not converging to an average value in the long-term. As part of the task of building a prediction model for the future population in the system, I went back to the proof of Little’s law to understand the mechanics on how to modify it to the time-varying case and making it transient. Here, transience refers to the ability to have forecasts per month into the future, this is important as the population and arrivals exhibit heavy seasonality.</p> <p>This study led to this modified version of Little’s law for time-varying arrival rates:</p> <blockquote> <h4 id="theorem-average-population-in-system-for-time-varying-arrival-rates-a-transient-littles-law">Theorem: Average Population in System for Time-varying Arrival Rates (a transient Little’s Law)</h4> <p>Consider a discrete time stochastic system with time indexed as \(t=0,1,2,\dots\) with arrivals given by arbitrary rates \(\lambda_1,\lambda_2\) where arrivals spend an average time $w$ in the system. The average number in the system \(L_t\) at time \(t\) is given by:</p> \[L_t = (1-e^{-1/w})\lambda_t w +e^{-1/w}L_{t-1}\] </blockquote> <p>The theorem states that the average number in the system is a combination of what’s implied by Little’s law \(\lambda_t w\) plus the number in the system the previous period that haven’t completed their time in the system. Remarkably this retrieves the original Little’s law in the case where $\lambda_1=\lambda_2=…$ and also in the case where \(w\rightarrow 0\) (meaning that the service is fast enough for the number in system to converge to the quantity implied by Little’s law before the rate changes). Lastly, in the case where the arrival rates converge, again Little’s law is retrieved.</p> <h2 id="predicting-the-population-at-rikers">Predicting the Population at Rikers</h2> <p>The previous theorem is useful in two ways: on one hand it provides a way to predict the future population by modeling the arrival rates (say, with a time-series model); on the other, and more importantly, it also provides a model that can quantify how changes in policy (recall that the average time in the system \(w\) is determined by the time the case takes to process) change the average number in population. This is specially useful to quantify how speeding up the court system can do to reduce or change the population at Rikers, the kind of analysis that while hinted intuitively in the Lippman report, is lacking a quantitative basis.</p> <p>Using this model, we forecasted the arrival rates as a time series model \(\hat\lambda_t = f(\lambda_{t_1})\) and used the result in our Theorem. This exercise produced the following results:</p> <pre><code class="language-chartjs">{
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://elioth.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://elioth.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2025-08-25T21:14:08+00:00</updated><id>https://elioth.github.io/feed.xml</id><title type="html">blank</title><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">a post with math</title><link href="https://elioth.github.io/blog/2025/math/" rel="alternate" type="text/html" title="a post with math"/><published>2025-08-24T15:12:00+00:00</published><updated>2025-08-24T15:12:00+00:00</updated><id>https://elioth.github.io/blog/2025/math</id><content type="html" xml:base="https://elioth.github.io/blog/2025/math/"><![CDATA[<p><small><em>Disclaimer: All information in this post is publicly available, either in the Independent Rikers Commission (a.k.a., Lippman Commission) <a href="https://static1.squarespace.com/static/5b6de4731aef1de914f43628/t/67dd7c6d4e5dca1fa86db6d8/1742568562268/Independent+Rikers+Commission+Blueprint+to+Close+Rikers+Island+March+2025.pdf">report</a> or in the <a href="https://www.vitalcitynyc.org/articles/the-citys-new-rikers-math">report</a> that I authored while working as Assistant Commissioner of Operations Research, that was made public through a Freedom of Information Act (FOIA) request made by the Nonprofit Vital City. Moreover, the contents of this post are only my opinions and do not represent the views of the city or any other entity I am or was affiliated with.</em> </small></p> <blockquote> <p>Operations research is a scientiﬁc method of providing executive departments with a quantitative basis for decisions regarding operations under their control.</p> </blockquote> <p>Out of all the definitions of Operations Research, this is the one I like most. It really comprises the quantitative spirit of the discipline while emphasizing that ultimately, the goal is problem solving. The quote is attributed to Philip M. Morse (the father or OR in the U.S.) in a John D. Little’s <a href="https://pubsonline.informs.org/doi/epdf/10.1287/opre.50.1.146.17799">article</a> commemorating the 50th anniversary of the Operations Research Journal.</p> <h2 id="some-background">Some Background</h2> <p>In this post, we talk about connecting one of Little’s key discoveries (his eponymous law) and a very relevant set of problems that are in great need of OR solutions. Out of these problems, Rikers Island has been infamously at the center of innumerable controversies and plagued with problems since its construction. The aim of this post is not to comment on the social and justice aspects of the NYC correctional system, but rather talk about a common set of challenges that stochastic systems (such as Rikers Island) face because of their scale, and some quantitative strategies to guide urban planning for either replace existing facilities or build new ones.</p> <p>As a motivation and context to this problem, Rikers is set to be closed by 2027 and replaced by different facilities in each borough. When this plan was set into law in 2019, the population of Rikers was in a steady decline, and it was then decided that 3,300 beds was enough capacity for the new facilities. Long-story short, a combination of factors including the pandemic, a different set of bail-laws and patterns of crime have set the population in the opposite direction. As part of my work I was tasked with creating projections of the population in the future in a data-driven way back in 2022-23. This post is a commentary on that analysis, which I believe has value beyond correctional facilities, and can be applied to many large scale stochastic systems (such as airports, traffic roads and so on).</p> <h2 id="the-forecast-challenge-and-the-connection-with-littles-law">The Forecast Challenge and the Connection with Little’s Law</h2> <p>Rikers (or any correctional facility) is a stochastic system where there is a series of arrivals that stay a random amount of time (in this case, pretrial cases) before exiting the system. Little’s law is the swiss knife of a scientist studying stochastic systems. The simplicity and beauty of the formula \(L=\lambda w\), expressing that the average number in the system \(L\) is equal to their arrival rate \(\lambda\) times the average waiting time \(w\) provides simple answer to in general a difficult question.</p> <p>While an incredibly useful relation, it doesn’t apply then the arrival rate is time-varying and not converging to an average value in the long-term. As part of the task of building a prediction model for the future population in the system, I went back to the proof of Little’s law to understand the mechanics on how to modify it to the time-varying case and making it transient. Here, transience refers to the ability to have forecasts per month into the future, this is important as the population and arrivals exhibit heavy seasonality.</p> <p>This study led to this modified version of Little’s law for time-varying arrival rates:</p> <blockquote> <h4 id="theorem-average-population-in-system-for-time-varying-arrival-rates-a-transient-littles-law">Theorem: Average Population in System for Time-varying Arrival Rates (a transient Little’s Law)</h4> <p>Consider a discrete time stochastic system with time indexed as \(t=0,1,2,\dots\) with arrivals given by arbitrary rates \(\lambda_1,\lambda_2\) where arrivals spend an average time $w$ in the system. The average number in the system \(L_t\) at time \(t\) is given by:</p> \[L_t = (1-e^{-1/w})\lambda_t w +e^{-1/w}L_{t-1}\] </blockquote> <p>The theorem states that the average number in the system is a combination of what’s implied by Little’s law \(\lambda_t w\) plus the number in the system the previous period that haven’t completed their time in the system. Remarkably this retrieves the original Little’s law in the case where $\lambda_1=\lambda_2=…$ and also in the case where \(w\rightarrow 0\) (meaning that the service is fast enough for the number in system to converge to the quantity implied by Little’s law before the rate changes). Lastly, in the case where the arrival rates converge, again Little’s law is retrieved.</p> <h2 id="predicting-the-population-at-rikers">Predicting the Population at Rikers</h2> <p>The previous theorem is useful in two ways: on one hand it provides a way to predict the future population by modeling the arrival rates (say, with a time-series model); on the other, and more importantly, it also provides a model that can quantify how changes in policy (recall that the average time in the system \(w\) is determined by the time the case takes to process) change the average number in population. This is specially useful to quantify how speeding up the court system can do to reduce or change the population at Rikers, the kind of analysis that while hinted intuitively in the Lippman report, is lacking a quantitative basis.</p> <p>Using this model, we forecasted the arrival rates as a time series model \(\hat\lambda_t = f(\lambda_{t_1})\) and used the result in our Theorem. This exercise produced the following results:</p> <pre><code class="language-chartjs">{
   "type": "line",
   "data": {
     "labels": [
-      "2023-02",
-      "2023-03",
-      "2023-04",
-      "2023-05",
-      "2023-06",
-      "2023-07",
-      "2023-08",
-      "2023-09",
-      "2023-10",
-      "2023-11",
-      "2023-12",
-      "2024-01",
-      "2024-02",
-      "2024-03",
-      "2024-04",
-      "2024-05",
-      "2024-06",
-      "2024-07",
-      "2024-08",
-      "2024-09",
-      "2024-10",
-      "2024-11",
-      "2024-12",
-      "2025-01",
-      "2025-02",
-      "2025-03",
-      "2025-04",
-      "2025-05",
-      "2025-06"
+      "2023-02-01",
+      "2023-03-01",
+      "2023-04-01",
+      "2023-05-01",
+      "2023-06-01",
+      "2023-07-01",
+      "2023-08-01",
+      "2023-09-01",
+      "2023-10-01",
+      "2023-11-01",
+      "2023-12-01",
+      "2024-01-01",
+      "2024-02-01",
+      "2024-03-01",
+      "2024-04-01",
+      "2024-05-01",
+      "2024-06-01",
+      "2024-07-01",
+      "2024-08-01",
+      "2024-09-01",
+      "2024-10-01",
+      "2024-11-01",
+      "2024-12-01",
+      "2025-01-01",
+      "2025-02-01",
+      "2025-03-01",
+      "2025-04-01",
+      "2025-05-01",
+      "2025-06-01"
     ],
     "datasets": [
       {
@@ -138,24 +138,12 @@
         "spanGaps": false
       },
       {
-        "label": "C.I. Lower",
-        "fill": false,
-        "lineTension": 0.1,
-        "backgroundColor": "rgba(54,162,235,0.4)",
-        "borderColor": "rgba(54,162,235,1)",
-        "borderCapStyle": "butt",
-        "borderDash": [],
-        "borderDashOffset": 0,
-        "borderJoinStyle": "miter",
-        "pointBorderColor": "rgba(54,162,235,1)",
-        "pointBackgroundColor": "#fff",
-        "pointBorderWidth": 1,
-        "pointHoverRadius": 5,
-        "pointHoverBackgroundColor": "rgba(54,162,235,1)",
-        "pointHoverBorderColor": "rgba(220,220,220,1)",
-        "pointHoverBorderWidth": 2,
-        "pointRadius": 1,
-        "pointHitRadius": 10,
+        "label": "Confidence Interval",
+        "fill": "+1",
+        "backgroundColor": "rgba(128, 128, 128, 0.2)",
+        "borderColor": "transparent",
+        "pointBorderColor": "transparent",
+        "pointBackgroundColor": "transparent",
         "data": [
           5500.52,
           5367.83,
@@ -186,28 +174,16 @@
           6360.74,
           6546.08,
           6632.77
-        ],
-        "spanGaps": false
+        ]
       },
       {
         "label": "C.I. Upper",
         "fill": false,
         "lineTension": 0.1,
         "backgroundColor": "rgba(255,206,86,0.4)",
-        "borderColor": "rgba(255,206,86,1)",
-        "borderCapStyle": "butt",
-        "borderDash": [],
-        "borderDashOffset": 0,
-        "borderJoinStyle": "miter",
-        "pointBorderColor": "rgba(255,206,86,1)",
-        "pointBackgroundColor": "#fff",
-        "pointBorderWidth": 1,
-        "pointHoverRadius": 5,
-        "pointHoverBackgroundColor": "rgba(255,206,86,1)",
-        "pointHoverBorderColor": "rgba(220,220,220,1)",
-        "pointHoverBorderWidth": 2,
-        "pointRadius": 1,
-        "pointHitRadius": 10,
+        "borderColor": "transparent",
+        "pointBorderColor": "transparent",
+        "pointBackgroundColor": "transparent",
         "data": [
           6159.36,
           6365.96,
@@ -243,13 +219,13 @@
       }
     ]
   },
-   "options": {
+  "options": {
     "responsive": true,
     "maintainAspectRatio": false,
     "scales": {
       "y": {
-        "min": 4827.0,
-        "max": 9429.0
+        "min": 4827,
+        "max": 9429
       }
     }
   }
