@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://elioth.github.io/sitemap.xml
+Sitemap: https://eliotho.github.io/sitemap.xml
