@@ -23,9 +23,9 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "post-a-post-with-math",
+        },{id: "post-morse-little-rikers-and-beyond",
         
-          title: "a post with math",
+          title: "Morse, Little, Rikers and Beyond",
         
         description: "A blog post about forecasting for large stochastic systems.",
         section: "Posts",
