@@ -2,14 +2,14 @@
 layout: about
 title: about
 permalink: /
-subtitle: Chief Scientist and Founder at <a href='https://www.staffinganalytics.io/'>Staffing Analytics</a>. 
+subtitle: Chief Scientist and Founder of <a href='https://www.staffinganalytics.io/'>Staffing Analytics</a>. 
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>New York City, NY 10065</p>
+    <p><a href='assets/pdf/Elioth_Sanabria-cv-streamlined.pdf'>CV</a></p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -28,4 +28,6 @@ latest_posts:
 
 Hi, my name is Elioth, I'm a research scientist with a PhD in Operations Research from [Columbia University IEOR Department](https://ieor.columbia.edu/). Currently, I'm working on multiple projects applying Operations Research to solve real world problems. I founded [Staffing Analytics](https://www.staffinganalytics.io/), created the retail analytics plafform [Predictheus](https://predictheus.com/) and the data fusion platform [EOS Intel](https://eos-intel.io/).
 
-Before this, I served in the NYC Government as Assistant Commissioner of Operations Research for the [Department of Correction](https://www.nyc.gov/site/doc/index.page) solving a lot of logistical optimization problems (ranging from supply chain problems, transportation optimization, staff scheduling and so on). I also served as Deputy Director of Operations Research for [FDNY](https://www.nyc.gov/site/fdny/index.page), working on ambulance scheduling to minimize response times. This work was derived from my PhD thesis advised by Prof [David D. Yao](https://www.columbia.edu/~yao/) and [Henry Lam](https://www.columbia.edu/~khl2114/).
+Before this, I served in the NYC Government as Assistant Commissioner of Operations Research for the [NYC Department of Correction](https://www.nyc.gov/site/doc/index.page) solving a lot of logistical optimization problems (ranging from supply chain problems, transportation optimization, staff scheduling and so on). I also served as Deputy Director of Operations Research for [Fire Department of New York City (FDNY)](https://www.nyc.gov/site/fdny/index.page), working on ambulance scheduling to minimize response times. This work was derived from my PhD thesis advised by Prof [David D. Yao](https://www.columbia.edu/~yao/) and [Henry Lam](https://www.columbia.edu/~khl2114/).
+
+While I have eclectic research interests, the common thread is a deep emphasis in practical applications and maximizing the positive impact for society by applying Operations Research.
