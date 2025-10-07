@@ -23,7 +23,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "post-morse-little-rikers-and-beyond",
+        },{id: "post-algebra-and-optimization-for-robotic-arms",
+        
+          title: "Algebra and Optimization for Robotic Arms",
+        
+        description: "A blog post about the algebra behind robotic arms",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/ra3d/";
+          
+        },
+      },{id: "post-morse-little-rikers-and-beyond",
         
           title: "Morse, Little, Rikers and Beyond",
         
