@@ -23,7 +23,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "post-algebra-and-optimization-for-robotic-arms",
+        },{id: "post-grade-inflation-or-how-i-learned-to-stop-worrying-and-love-the-ai",
+        
+          title: "Grade Inflation - or How I Learned to Stop Worrying and Love the...",
+        
+        description: "A blog post about my experience designing a class around AI",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/aicl/";
+          
+        },
+      },{id: "post-algebra-and-optimization-for-robotic-arms",
         
           title: "Algebra and Optimization for Robotic Arms",
         
