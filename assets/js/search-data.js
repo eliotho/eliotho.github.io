@@ -73,7 +73,12 @@ ninja.data = [{
           section: "News",},{id: "news-see-this-visualization-on-supply-chain-networks-and-its-accompanying-paper",
           title: 'See this visualization on Supply Chain Networks and its accompanying paper.',
           description: "",
-          section: "News",},{id: "projects-project-1",
+          section: "News",},{id: "news-global-oil-network-simulator-on-the-front-page-of-hacker-news",
+          title: 'Global oil network simulator on the front page of Hacker News',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_oil_network_hn/";
+            },},{id: "projects-project-1",
           title: 'project 1',
           description: "with background image",
           section: "Projects",handler: () => {
