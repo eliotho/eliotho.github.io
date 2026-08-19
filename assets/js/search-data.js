@@ -78,6 +78,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_oil_network_hn/";
+            },},{id: "news-supply-chain-simulator-featured-on-un-comtrade-labs",
+          title: 'Supply chain simulator featured on UN Comtrade Labs',
+          description: "",
+          section: "News",handler: () => {
+              window.location.href = "/news/announcement_un_comtrade/";
             },},{id: "projects-project-1",
           title: 'project 1',
           description: "with background image",
